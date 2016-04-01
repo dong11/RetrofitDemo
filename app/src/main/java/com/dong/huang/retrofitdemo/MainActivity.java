@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Interceptor interceptor = new Interceptor() {
             @Override
             public com.squareup.okhttp.Response intercept(Chain chain) throws IOException {
-                Request newRequest = chain.request().newBuilder().addHeader("apikey", "c1d09145de3bbd6af864b3c92dbf8800").build();
+                Request newRequest = chain.request().newBuilder().addHeader("User-Agent", "Retrofit-Sample-App").build();
                 return chain.proceed(newRequest);
             }
         };
