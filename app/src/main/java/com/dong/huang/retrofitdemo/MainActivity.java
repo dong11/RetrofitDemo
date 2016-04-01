@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnClick(View view){
-        String userName = mEditText.getText().toString();
+        final String userName = mEditText.getText().toString();
         if(userName == null){
             return;
         }
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         MyApiInterface apiInterface = retrofit.create(MyApiInterface.class);
 
-        Call<JsonModel> telModelCall = apiInterface.getTelModel("dong11");
+        Call<JsonModel> telModelCall = apiInterface.getTelModel(userName);
 
         //异步在UI线程返回结果
         telModelCall.enqueue(new Callback<JsonModel>() {
@@ -81,14 +81,19 @@ public class MainActivity extends AppCompatActivity {
 
                 JsonModel jsonModel = response.body();
 
-                mTextView.setText("login::" + jsonModel.getLogin() + "\nid::" + jsonModel.getId() +
-                                    "\nurl::" + jsonModel.getUrl() + "\npublic_repos" + jsonModel.getPublic_repos());
+                if(jsonModel != null) {
+                    mTextView.setText("login::" + jsonModel.getLogin() + "\nid::" + jsonModel.getId() +
+                            "\nurl::" + jsonModel.getUrl() + "\npublic_repos" + jsonModel.getPublic_repos());
+                } else {
+                    mTextView.setText("github没有" + userName + "这用户");
+                }
 
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.e(TAG, t.toString());
+                mTextView.setText(t.getMessage());
+                mProgressBar.setVisibility(View.INVISIBLE);
             }
         });
     }
