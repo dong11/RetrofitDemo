@@ -18,7 +18,7 @@ import retrofit.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
     //BASE_URL：一般都是域名
-    private static final String BASE_URL = "http://app.wy.guahao.com/json/white/applocal";
+    private static final String BASE_URL = "https://api.github.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

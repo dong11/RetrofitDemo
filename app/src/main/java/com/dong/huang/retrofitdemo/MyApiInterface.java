@@ -7,6 +7,6 @@ import retrofit.http.GET;
  * Created by dong on 16/4/1.
  */
 public interface MyApiInterface {
-    @GET("/mediafocus")
+    @GET("https://api.github.com")
     Call<JsonModel> getTelModel();
 }
